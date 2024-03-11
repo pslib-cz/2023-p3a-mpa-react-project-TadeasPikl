@@ -1,5 +1,5 @@
-# Rekreace hry Lost Cities v react-ts
-
+# Rekreace hry Ztracená města v react-ts
+https://www.zatrolene-hry.cz/spolecenska-hra/ztracena-mesta-512/
 ## Téma
 
 Tady bude krátký a úderný popis o účelu, významu, funkcionalitě...
