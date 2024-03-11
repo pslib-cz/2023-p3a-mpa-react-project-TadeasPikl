@@ -1,4 +1,4 @@
-# Název mého projektu, programu, hry...
+# Rekreace hry Lost Cities v react-ts
 
 ## Téma
 
