@@ -2,7 +2,9 @@
 https://www.zatrolene-hry.cz/spolecenska-hra/ztracena-mesta-512/
 ## Téma
 
-Tady bude krátký a úderný popis o účelu, významu, funkcionalitě...
+Ztracená města je karetní hra pro dva hráče od Reinera Knizii. Hráči se pomocí vykládání karet vydávají na objevitelské cesty do odlehlých a tajemných koutů země.
+
+V každém kole hráč vykládá jednu kartu expedice nebo sázky. Pokud nechce nebo nemůže vyložit kartu, musí jednu kartu odhodit na odkládací plochu, čímž ale může nahrát protivníkovy. Pak si bere kartu buď z lízacího balíčku nebo z hromádek odhozených karet, které tam bud protivník vyhodil nebo si je zde sám odložil. Hra končí ve chvíli, kdy se lízne poslední karta z lízacího balíčku. Pak se spočítají body za vyložené karty expedice. Vyhrává ten, kdo získal po třech hrách nejvíce bodů.
 
 ## Odkazy pro vývoj
 
