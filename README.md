@@ -9,9 +9,8 @@ V každém kole hráč vykládá jednu kartu expedice nebo sázky. Pokud nechce 
 ## Odkazy pro vývoj
 
 Zde budou živé linky na:
-- figma návrh stránek aplikace
+- figma návrh stránek aplikace - ![Figma link](https://img.shields.io/badge/Link-Figma-purple)
 - odkaz na gh-pages projektu
-- odkaz do repozitáře projektu, pokud pracuji v teamu a zde vývoj neprobíhá
 
 ### Z čeho čerpat
 
