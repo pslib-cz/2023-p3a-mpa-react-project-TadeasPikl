@@ -1,42 +1,86 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+:root {
+  --card-yellow: #F0DB1D;
+  --card-blue: #0075FF;
+  --card-green: #0EAC00;
+  --card-white: #F3F3F3;
+  --card-red: #7B0000;
+
+  --basic-white: white;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+@font-face {
+  font-family: "Rammetto One";
+  src: url("./fonts/Rammetto_One/RammettoOne-Regular.ttf");
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+html {
+  background-image: url("./images/table.jpg");
 }
 
 .card {
-  padding: 2em;
+  width: 200px;
+  height: 300px;
+  background-color: black;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  text-align: center;
+  gap: 2px;
+  padding: 2px 15px 15px 15px;
+
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: var(--cards-white, #FFF);
+  font-family: "Rammetto One";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
-.read-the-docs {
-  color: #888;
+.card__yellow {
+  color: var(--card-yellow);
+}
+.card__blue {
+  color: var(--card-blue);
+}
+.card__green {
+  color: var(--card-green);
+}
+.card_white {
+  color: var(--card-white);
+}
+.card__red {
+  color: var(--card-red);
+}
+
+.card--values {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card--image {
+  border: var(--basic-white) 1px solid;
+  border-radius: 10px;
+  height: 240px;
+  flex-grow: 1;
+  flex-shrink: 0;
+}
+
+.card__yellow > .card--image {
+  background-color: var(--card-yellow);
+}
+.card__blue > .card--image {
+  background-color: var(--card-blue);
+}
+.card__green > .card--image {
+  background-color: var(--card-green);
+}
+.card_white > .card--image {
+  background-color: var(--card-white);
+}
+.card__red > .card--image {
+  background-color: var(--card-red);
 }

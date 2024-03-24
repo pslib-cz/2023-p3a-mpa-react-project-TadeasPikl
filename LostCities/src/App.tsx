@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import './App.css'
 import MainMenu from './components/MainMenu'
+import Game from './components/Game'
 
 function App() {
   const [gameStarted, setGameStarted] = useState(false)
@@ -8,7 +9,7 @@ function App() {
 
   return (
     <>
-    {gameStarted ? null : <MainMenu setGameStarted={setGameStarted} />}
+    {gameStarted ? <Game /> : <MainMenu setGameStarted={setGameStarted} />}
     </>
   )
 }
