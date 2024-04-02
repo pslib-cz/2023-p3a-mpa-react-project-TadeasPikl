@@ -18,6 +18,8 @@ const ICON_DICT = {
 }
 
 const CardVisual: React.FC<CardProps> = ({ color, value }) => {
+
+    
     return (
         <div className={"card card__" + color}>
             <div className="card--values">

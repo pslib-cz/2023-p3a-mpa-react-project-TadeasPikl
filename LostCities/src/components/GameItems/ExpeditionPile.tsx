@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import Card from './Card';
 import { Color } from '../Game';
 
-interface DiscardPileProps {
+interface ExpeditionPileProps {
     color: Color;
+    player: boolean;
 }
 
-const DiscardPile: React.FC<DiscardPileProps> = ({color}) => {
+const ExpeditionPile: React.FC<ExpeditionPileProps> = ({color, player}) => {
     const [cards, setCards] = useState([]);
-    
+    const p = player
+
     return (
         <div>
             {
@@ -18,4 +20,4 @@ const DiscardPile: React.FC<DiscardPileProps> = ({color}) => {
     );
 };
 
-export default DiscardPile;
+export default ExpeditionPile;

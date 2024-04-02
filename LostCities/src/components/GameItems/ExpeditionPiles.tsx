@@ -2,9 +2,9 @@ import React from 'react';
 import DiscardPile from "./DiscardPile";
 import { Color, ALL_COLORS } from '../Game';
 
-const DiscardPiles = () => {
+const ExpeditionPiles: React.FC = () => {
     return (
-        <div className='Discards'>
+        <div className='Expeditions'>
 
             {ALL_COLORS.map((color) => (
                 <DiscardPile color={color} />
@@ -13,4 +13,4 @@ const DiscardPiles = () => {
     );
 };
 
-export default DiscardPiles;
+export default ExpeditionPiles;

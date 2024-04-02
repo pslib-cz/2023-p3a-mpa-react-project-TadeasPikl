@@ -15,6 +15,7 @@
 
 html {
   background-image: url("./images/table.jpg");
+  background-size: cover;
 }
 
 .card {
