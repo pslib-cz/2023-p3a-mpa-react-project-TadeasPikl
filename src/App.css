@@ -1,0 +1,87 @@
+:root {
+  --card-yellow: #F0DB1D;
+  --card-blue: #0075FF;
+  --card-green: #0EAC00;
+  --card-white: #F3F3F3;
+  --card-red: #7B0000;
+
+  --basic-white: white;
+}
+
+@font-face {
+  font-family: "Rammetto One";
+  src: url("./fonts/Rammetto_One/RammettoOne-Regular.ttf");
+}
+
+html {
+  background-image: url("./images/table.jpg");
+  background-size: cover;
+}
+
+.card {
+  width: 200px;
+  height: 300px;
+  background-color: black;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  text-align: center;
+  gap: 2px;
+  padding: 2px 15px 15px 15px;
+
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: var(--cards-white, #FFF);
+  font-family: "Rammetto One";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.card__yellow {
+  color: var(--card-yellow);
+}
+.card__blue {
+  color: var(--card-blue);
+}
+.card__green {
+  color: var(--card-green);
+}
+.card_white {
+  color: var(--card-white);
+}
+.card__red {
+  color: var(--card-red);
+}
+
+.card--values {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card--image {
+  border: var(--basic-white) 1px solid;
+  border-radius: 10px;
+  height: 240px;
+  flex-grow: 1;
+  flex-shrink: 0;
+}
+
+.card__yellow > .card--image {
+  background-color: var(--card-yellow);
+}
+.card__blue > .card--image {
+  background-color: var(--card-blue);
+}
+.card__green > .card--image {
+  background-color: var(--card-green);
+}
+.card_white > .card--image {
+  background-color: var(--card-white);
+}
+.card__red > .card--image {
+  background-color: var(--card-red);
+}
