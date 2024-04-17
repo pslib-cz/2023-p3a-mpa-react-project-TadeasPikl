@@ -1,6 +1,8 @@
-import { createContext, useState } from "react";
-import CardVisual from "./GameItems/Card";
-import DiscardPiles from "./GameItems/DiscardPiles";
+import { createContext, useEffect, useState } from "react";
+import CardVisual from "./gameItems/Card";
+import DiscardPiles from "./gameItems/DiscardPiles";
+import ExpeditionPiles from "./gameItems/ExpeditionPiles";
+import HandDisplay from "./gameItems/HandDisplay";
 
 export enum Color {
     Yellow = "yellow",
@@ -11,8 +13,15 @@ export enum Color {
 };
 
 export const ALL_COLORS = [Color.Yellow, Color.Blue, Color.Green, Color.White, Color.Red];
+export const COLOR_NUMS = {
+    "yellow": 0,
+    "blue": 1,
+    "green": 2,
+    "white": 3,
+    "red": 4
+}
 
-interface Card {
+export interface Card {
     color: Color;
     value: number;
 };
@@ -26,13 +35,15 @@ interface GameState {
     player2Expeditions: Card[][];
 };
 
-const GameStateContext = createContext<GameState | undefined>(undefined);
+export const GameStateContext = createContext<GameState | undefined>(undefined);
 
 
 const Game = () => {
     const [gameState, setGameState] = useState<GameState>();
 
-    
+    useEffect(() => {
+        GameStart();
+    }, []);
 
     function GenerateDeck() {
         let deck: Card[] = [];
@@ -85,9 +96,10 @@ const Game = () => {
 
     return (
         <GameStateContext.Provider value={gameState}>
-
+            <ExpeditionPiles player={false} />
             <DiscardPiles />
-        
+            <ExpeditionPiles player={false} />
+            <HandDisplay />
         </GameStateContext.Provider>
     );
 }

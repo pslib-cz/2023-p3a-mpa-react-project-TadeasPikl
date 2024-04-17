@@ -1,13 +1,17 @@
 import React from 'react';
-import DiscardPile from "./DiscardPile";
 import { Color, ALL_COLORS } from '../Game';
+import ExpeditionPile from './ExpeditionPile';
 
-const ExpeditionPiles: React.FC = () => {
+interface ExpeditionPilesProps {
+    player: boolean;
+}
+
+const ExpeditionPiles: React.FC<ExpeditionPilesProps> = ({player}) => {
     return (
-        <div className='Expeditions'>
+        <div className='expeditions'>
 
             {ALL_COLORS.map((color) => (
-                <DiscardPile color={color} />
+                <ExpeditionPile color={color} player={player} />
             ))}
         </div>
     );

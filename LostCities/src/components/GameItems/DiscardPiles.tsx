@@ -4,7 +4,7 @@ import { Color, ALL_COLORS } from '../Game';
 
 const DiscardPiles = () => {
     return (
-        <div className='Discards'>
+        <div className='discards'>
 
             {ALL_COLORS.map((color) => (
                 <DiscardPile color={color} />
