@@ -1,6 +1,6 @@
 import React from 'react';
 import { Color } from '../Game';
-import { Fish, Handshake, Pyramids, Snow, Tree, Volcano } from '../../assets/Icons';
+import { Fish, Handshake, Pyramids, Snow, Tree, Volcano } from '../assets/Icons';
 
 interface CardProps {
     color: Color;
