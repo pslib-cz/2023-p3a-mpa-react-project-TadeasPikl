@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import CardVisual from './Card';
-import { Color, Card, GameStateContext, COLOR_NUMS } from '../Game';
+import CardVisual from "./Card";
+import { Color, GameStateContext, COLOR_NUMS } from '../Game';
 
 interface ExpeditionPileProps {
     color: Color;

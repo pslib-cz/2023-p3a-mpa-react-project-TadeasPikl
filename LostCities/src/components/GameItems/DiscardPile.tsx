@@ -1,13 +1,13 @@
-import React, { useState, useContext } from 'react';
-import CardVisual from './Card';
-import { Color, Card, GameStateContext, COLOR_NUMS } from '../Game';
+import React, { useContext } from 'react';
+import CardVisual from "./Card";
+import { Color, GameStateContext, COLOR_NUMS } from '../Game';
 
 interface DiscardPileProps {
     color: Color;
 }
 
 const DiscardPile: React.FC<DiscardPileProps> = ({color}) => {
-    const [cards, setCards] = useState<Card[]>([]);
+    //const [cards, setCards] = useState<Card[]>([]);
     
     const gameState = useContext(GameStateContext);
 

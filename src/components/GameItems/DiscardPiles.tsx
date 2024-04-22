@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext } from "react";
 import DiscardPile from "./DiscardPile";
 import { ALL_COLORS, GameStateContext } from '../Game';
 

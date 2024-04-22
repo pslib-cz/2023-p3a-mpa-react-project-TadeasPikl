@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Card from './Card';
 import { Color } from '../Game';
 
 interface DiscardPileProps {
@@ -7,7 +6,7 @@ interface DiscardPileProps {
 }
 
 const DiscardPile: React.FC<DiscardPileProps> = ({color}) => {
-    const [cards, setCards] = useState([]);
+    //const [cards, setCards] = useState([]);
     
     return (
         <div>

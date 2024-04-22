@@ -1,8 +1,7 @@
 import { createContext, useEffect, useState } from "react";
-import CardVisual from "./gameItems/Card";
-import DiscardPiles from "./gameItems/DiscardPiles";
-import ExpeditionPiles from "./gameItems/ExpeditionPiles";
-import HandDisplay from "./gameItems/HandDisplay";
+import DiscardPiles from "./GameItems/DiscardPiles";
+import ExpeditionPiles from "./GameItems/ExpeditionPiles";
+import HandDisplay from "./GameItems/HandDisplay";
 
 export enum Color {
     Yellow = "yellow",

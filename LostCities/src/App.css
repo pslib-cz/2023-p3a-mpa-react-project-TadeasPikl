@@ -116,18 +116,20 @@ body > div {
   transform: scale(1.1) translateY(-10px);
 }
 
-
-.discards {
+.card-piles {
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 0.75em;
+  background-color: var(--menu-bg);
+  padding: 1em 1.5em;
+}
+
+.card-piles--discards {
   position: absolute;
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  background-color: var(--menu-bg);
-  padding: 1em 1.5em;
 }
 
 .discards > div {
@@ -138,9 +140,9 @@ body > div {
   /*filter: brightness(0.9);*/
 }
 
-.discards > div > .card {
+/*.discards > div > .card {
   transform: rotate(90deg);
-}
+}*/
 
 .pile__yellow {
   background-color: var(--card-yellow);

@@ -1,10 +1,9 @@
-import React from 'react';
 import DiscardPile from "./DiscardPile";
-import { Color, ALL_COLORS } from '../Game';
+import { ALL_COLORS } from '../Game';
 
 const DiscardPiles = () => {
     return (
-        <div className='discards'>
+        <div className='card-piles card-piles--discards'>
 
             {ALL_COLORS.map((color) => (
                 <DiscardPile color={color} />
