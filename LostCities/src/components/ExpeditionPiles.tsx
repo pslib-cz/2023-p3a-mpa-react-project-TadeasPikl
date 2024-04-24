@@ -1,5 +1,5 @@
 import React from 'react';
-import { ALL_COLORS } from '../Game';
+import { ALL_COLORS } from '../Consts';
 import ExpeditionPile from "./ExpeditionPile";
 
 interface ExpeditionPilesProps {

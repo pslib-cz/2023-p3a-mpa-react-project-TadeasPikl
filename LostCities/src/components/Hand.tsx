@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import CardVisual from './Card';
-import { GameStateContext } from '../Game';
+import { GameStateContext } from '../GameStateContext';
 
 const HandDisplay: React.FC = () => {
     const gameState = useContext(GameStateContext);

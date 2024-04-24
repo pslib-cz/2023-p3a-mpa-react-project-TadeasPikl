@@ -1,15 +1,19 @@
 import { createContext, useEffect, useState } from "react";
 import DiscardPiles from "./components/DiscardPiles";
 import ExpeditionPiles from "./components/ExpeditionPiles";
-import HandDisplay from "./components/HandDisplay";
+import HandDisplay from "./components/Hand";
+import DrawPile from "./components/DrawPile";
 
 
 const Game = () => {
     return (
         <>
-            <ExpeditionPiles player={false} />
+            <DrawPile />
+            <div className="expedition-table">
+                <ExpeditionPiles player={false} />
+                <ExpeditionPiles player={true} />
+            </div>
             <DiscardPiles />
-            <ExpeditionPiles player={true} />
             <HandDisplay />
         </>
     );

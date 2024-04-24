@@ -1,5 +1,5 @@
 import DiscardPile from "./DiscardPile";
-import { ALL_COLORS } from '../Game';
+import { ALL_COLORS } from '../Consts';
 
 const DiscardPiles = () => {
     return (

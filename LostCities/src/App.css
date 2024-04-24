@@ -21,6 +21,8 @@ body {
   background-size: cover;
   height: 100vh;
   width: 100vw;
+  min-width: 1150px;
+  min-height: 800px;
 }
 
 body > div {
@@ -118,7 +120,6 @@ body > div {
 
 .card-piles {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   gap: 0.75em;
   background-color: var(--menu-bg);
@@ -126,15 +127,28 @@ body > div {
 }
 
 .card-piles--discards {
+  flex-direction: column;
   position: absolute;
   left: 0;
   top: 50%;
   transform: translateY(-50%);
 }
 
-.discards > div {
+.card-piles--expedtions {
+  flex-direction: row;
+}
+
+.card-piles--discards > div {
   width: calc(300px  * var(--card-scale) + 2px);
   height: calc(200px * var(--card-scale) + 2px);
+  border: 1px solid var(--basic-white);
+  border-radius: 3px;
+  /*filter: brightness(0.9);*/
+}
+
+.card-piles--expeditions > div {
+  width: calc(200px  * var(--card-scale) + 2px);
+  height: calc(300px * var(--card-scale) + 2px);
   border: 1px solid var(--basic-white);
   border-radius: 3px;
   /*filter: brightness(0.9);*/
@@ -143,6 +157,14 @@ body > div {
 /*.discards > div > .card {
   transform: rotate(90deg);
 }*/
+
+.expedition-table {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
 
 .pile__yellow {
   background-color: var(--card-yellow);
@@ -158,4 +180,13 @@ body > div {
 }
 .pile__red {
   background-color: var(--card-red);
+}
+
+
+/* Draw Pile */
+
+.draw-pile {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
