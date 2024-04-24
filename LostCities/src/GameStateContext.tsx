@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useReducer, useState } from 'react';
+import React, { createContext, useReducer } from 'react';
 import { Card } from './components/Card';
 import { StartGame } from './gameLogic/DeckManager';
 
@@ -16,7 +16,6 @@ export type GameState = {
     discardPiles: Card[][];
     player1Expeditions: Card[][];
     player2Expeditions: Card[][];
-
 };
 
 
@@ -44,7 +43,7 @@ function ActionReducer(state: GameState, action: ReducerAction) {
                         ...state,
                         deck: newDeck,
                         player1Hand: newHand,
-                        turnStage: TurnStage.PLAY
+                        turnStage: TurnStage.OPPONENT
                     }
                 default:
                     return state;

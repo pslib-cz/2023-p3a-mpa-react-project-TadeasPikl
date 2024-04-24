@@ -1,5 +1,6 @@
 import React from 'react';
 import { Fish, Handshake, Pyramids, Snow, Tree, Volcano } from '../assets/Icons';
+import { useDrag } from 'react-dnd'
 
 export enum Color {
     Yellow = "yellow",
@@ -12,6 +13,7 @@ export enum Color {
 export interface Card {
     color: Color;
     value: number; // 0 = wager cards, 2-10 = number cards
+    isInHand?: boolean;
 };
 
 const ICON_SIZE = "1.5em";

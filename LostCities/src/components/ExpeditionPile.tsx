@@ -8,22 +8,26 @@ interface ExpeditionPileProps {
     player: boolean;
 }
 
+
 const ExpeditionPile: React.FC<ExpeditionPileProps> = ({color, player}) => {
     const gameState = useContext(GameStateContext);
     const p = player
 
+
+    const GetTopCard = () => {
+        if (p) {
+            return gameState?.player1Expeditions[COLOR_NUMS[color]].slice(-1)[0]
+        }
+        else {
+            return gameState?.player1Expeditions[COLOR_NUMS[color]].slice(-1)[0]
+        }
+    }
+
+
     return (
         <div className={"pile__" + color}>
             {
-                p
-                ? 
-                gameState?.player1Expeditions[COLOR_NUMS[color]].map((card) => (
-                    <CardVisual color={card.color} value={card.value} />
-                ))
-                :
-                gameState?.player2Expeditions[COLOR_NUMS[color]].map((card) => (
-                    <CardVisual color={card.color} value={card.value} />
-                ))
+                GetTopCard() === undefined ? null : <CardVisual color={color} value={GetTopCard()!.value} />
             }
         </div>
     );
