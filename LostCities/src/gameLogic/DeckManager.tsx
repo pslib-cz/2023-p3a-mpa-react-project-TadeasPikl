@@ -1,6 +1,5 @@
-import { Card } from "../components/Card";
+import { Card, GameState, TurnStage } from "../ItemTypes";
 import { ALL_COLORS } from "../Consts";
-import { GameState, TurnStage } from "../GameStateContext";
 
 export function GenerateDeck() {
     let deck: Card[] = [];
@@ -51,4 +50,18 @@ export function StartGame() {
     };
 
     return state;
+}
+
+
+
+export function AddToExpedition(state: GameState, handIndex: number, expeditionIndex: number) {
+    if (state.turnStage != TurnStage.PLAY) {
+        return state;
+    }
+    
+    var newState = state;
+    var expedition = state.player1Expeditions[expeditionIndex];
+    var card = state.player1Hand[handIndex];
+
+
 }

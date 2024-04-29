@@ -102,6 +102,14 @@ body > div {
 }
 
 
+.card__dragging {
+  opacity: 0;
+  /* display: none; */
+}
+
+
+/* Card Piles */
+
 .hand {
   display: flex;
   justify-content: center;

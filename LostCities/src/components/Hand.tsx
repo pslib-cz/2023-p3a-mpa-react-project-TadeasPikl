@@ -9,7 +9,7 @@ const HandDisplay: React.FC = () => {
         <div className='hand'>
             {
                 gameState?.player1Hand.map((card) => (
-                    <CardVisual color={card.color} value={card.value} isInHand={true}/>
+                    <CardVisual color={card.color} value={card.value} handIndex={gameState.player1Hand.indexOf(card)}/>
                 ))
             }
         </div>

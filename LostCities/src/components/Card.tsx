@@ -1,20 +1,9 @@
 import React from 'react';
 import { Fish, Handshake, Pyramids, Snow, Tree, Volcano } from '../assets/Icons';
+import { Card } from '../ItemTypes';
 import { useDrag } from 'react-dnd'
+import { CardDnDFromHand } from '../Consts';
 
-export enum Color {
-    Yellow = "yellow",
-    Blue = "blue",
-    Green = "green",
-    White = "white",
-    Red = "red"
-};
-
-export interface Card {
-    color: Color;
-    value: number; // 0 = wager cards, 2-10 = number cards
-    isInHand?: boolean;
-};
 
 const ICON_SIZE = "1.5em";
 
@@ -26,11 +15,23 @@ const ICON_DICT = {
     "red": <Volcano     height={ICON_SIZE} width={ICON_SIZE}/>
 }
 
-const CardVisual: React.FC<Card> = ({ color, value }) => {
+const CardVisual: React.FC<Card> = ({ color, value, handIndex }) => {
 
-    
+
+    const [{ isDragging }, dragRef] = useDrag(
+        () => ({
+            type: CardDnDFromHand + color,
+            item: { color, value, handIndex },
+            canDrag: handIndex != null,
+            collect: (monitor) => ({
+                isDragging: monitor.isDragging()
+            })
+        }),
+        []
+    )
+      
     return (
-        <div className={"card card__" + color}>
+        <div ref={dragRef} className={"card card__" + color + (isDragging ? " card__dragging" : "")}>
             <div className="card--values">
                 {value === 0 ? <Handshake className="card--value" height={ICON_SIZE} width={ICON_SIZE}/> : <span className="card-value">{value}</span>}
 

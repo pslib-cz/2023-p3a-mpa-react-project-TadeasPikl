@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
-import CardVisual, {Color} from "./Card";
+import CardVisual from "./Card";
 import { GameStateContext } from '../GameStateContext';
+import { Color } from '../ItemTypes';
 import { COLOR_NUMS } from '../Consts';
 
 interface DiscardPileProps {

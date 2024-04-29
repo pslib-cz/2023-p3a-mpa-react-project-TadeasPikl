@@ -1,22 +1,7 @@
 import React, { createContext, useReducer } from 'react';
-import { Card } from './components/Card';
+import { GameState, TurnStage } from './ItemTypes';
 import { StartGame } from './gameLogic/DeckManager';
 
-export enum TurnStage {
-    PLAY,
-    DRAW,
-    OPPONENT
-}
-
-export type GameState = {
-    deck: Card[];
-    turnStage: TurnStage;
-    player1Hand: Card[];
-    player2Hand: Card[];
-    discardPiles: Card[][];
-    player1Expeditions: Card[][];
-    player2Expeditions: Card[][];
-};
 
 
 export type ReducerAction = 
@@ -24,7 +9,6 @@ export type ReducerAction =
     { type: "DISCARD_PILE_DRAW", pileIndex: number } |
     { type: "PLAY", cardIndex: number, playSpace: any } |
     { type: "DISCARD", cardIndex: number }
-
 
 function ActionReducer(state: GameState, action: ReducerAction) {
     switch (state.turnStage) {

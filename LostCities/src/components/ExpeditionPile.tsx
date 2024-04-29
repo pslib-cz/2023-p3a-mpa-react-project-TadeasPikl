@@ -1,31 +1,32 @@
 import React, { useContext } from 'react';
-import CardVisual, {Color} from "./Card";
+import { useDrop } from 'react-dnd';
+import CardVisual from "./Card";
 import { GameStateContext } from '../GameStateContext';
-import { COLOR_NUMS } from '../Consts';
+import { Color } from '../ItemTypes';
+import { COLOR_NUMS, CardDnDFromHand } from '../Consts';
 
-interface ExpeditionPileProps {
+export interface ExpeditionPileProps {
     color: Color;
-    player: boolean;
 }
 
 
-const ExpeditionPile: React.FC<ExpeditionPileProps> = ({color, player}) => {
+const ExpeditionPile: React.FC<ExpeditionPileProps> = ({color}) => {
     const gameState = useContext(GameStateContext);
-    const p = player
-
 
     const GetTopCard = () => {
-        if (p) {
-            return gameState?.player1Expeditions[COLOR_NUMS[color]].slice(-1)[0]
-        }
-        else {
-            return gameState?.player1Expeditions[COLOR_NUMS[color]].slice(-1)[0]
-        }
+        return gameState?.player1Expeditions[COLOR_NUMS[color]].slice(-1)[0]
     }
+
+    const [collectedProps, drop] = useDrop(() => ({
+        accept: CardDnDFromHand + color,
+        drop: () => 
+    }))
+
+
 
 
     return (
-        <div className={"pile__" + color}>
+        <div ref={drop} className={"pile__" + color}>
             {
                 GetTopCard() === undefined ? null : <CardVisual color={color} value={GetTopCard()!.value} />
             }
