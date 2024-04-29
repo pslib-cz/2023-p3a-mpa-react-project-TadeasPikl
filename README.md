@@ -10,7 +10,7 @@ V každém kole hráč vykládá jednu kartu expedice nebo sázky. Pokud nechce 
 
 Zde budou živé linky na:
 - figma návrh stránek aplikace - [![Figma link](https://img.shields.io/badge/Link-Figma-purple)](https://www.figma.com/file/eWP2Gva3gnbnTXtWtdKm1N/Lost-Cities?type=design&node-id=0%3A1&mode=design&t=4ws58OK3slQo0XpU-1)
-- odkaz na gh-pages projektu
+- odkaz na gh-pages projektu - [![Github Pages](https://img.shields.io/badge/Github-Pages-blue)](https://pslib-cz.github.io/2023-p3a-mpa-react-project-TadeasPikl)
 
 ### Z čeho čerpat
 
