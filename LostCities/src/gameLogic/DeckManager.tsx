@@ -54,14 +54,14 @@ export function StartGame() {
 
 
 
-export function AddToExpedition(state: GameState, handIndex: number, expeditionIndex: number) {
+export function AddToExpedition(state: GameState/*, handIndex: number, expeditionIndex: number*/) {
     if (state.turnStage != TurnStage.PLAY) {
         return state;
     }
-    
+    /*
     var newState = state;
     var expedition = state.player1Expeditions[expeditionIndex];
     var card = state.player1Hand[handIndex];
-
+*/
 
 }

@@ -17,9 +17,9 @@ const ExpeditionPile: React.FC<ExpeditionPileProps> = ({color}) => {
         return gameState?.player1Expeditions[COLOR_NUMS[color]].slice(-1)[0]
     }
 
-    const [collectedProps, drop] = useDrop(() => ({
+    const [, drop] = useDrop(() => ({
         accept: CardDnDFromHand + color,
-        drop: () => 
+        
     }))
 
 
