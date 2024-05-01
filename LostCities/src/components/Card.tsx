@@ -20,7 +20,7 @@ const CardVisual: React.FC<Card> = ({ color, value, handIndex }) => {
 
     const [{ isDragging }, dragRef] = useDrag(
         () => ({
-            type: CardDnDFromHand + color,
+            type: CardDnDFromHand + color + 0,
             item: { color, value, handIndex },
             canDrag: handIndex != null,
             collect: (monitor) => ({

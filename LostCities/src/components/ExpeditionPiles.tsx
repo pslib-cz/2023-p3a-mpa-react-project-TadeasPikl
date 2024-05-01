@@ -1,10 +1,9 @@
 import React from 'react';
 import { ALL_COLORS } from '../Consts';
 import ExpeditionPile from "./ExpeditionPile";
-import ExpeditionPileEnemy from './ExpeditionPileEnemy';
 
 interface ExpeditionPilesProps {
-    player: boolean;
+    player: number;
 }
 
 const ExpeditionPiles: React.FC<ExpeditionPilesProps> = ({player}) => {
@@ -12,11 +11,7 @@ const ExpeditionPiles: React.FC<ExpeditionPilesProps> = ({player}) => {
         <div className='card-piles card-piles--expeditions'>
 
             {ALL_COLORS.map((color) => (
-                player
-                ?
-                <ExpeditionPile color={color} />
-                :
-                <ExpeditionPileEnemy color={color} />
+                <ExpeditionPile key={color} color={color} player={player} />
             ))}
         </div>
     );

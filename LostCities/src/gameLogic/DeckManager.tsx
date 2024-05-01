@@ -35,19 +35,15 @@ export function StartGame() {
         player1Hand.push(deck.pop()!);
         player2Hand.push(deck.pop()!);
     }
-        console.log(player1Hand);
-        console.log(player2Hand);
-        console.log(discardPiles);
 
     let state: GameState = {
         deck: deck,
         turnStage: TurnStage.PLAY,
-        player1Hand: player1Hand,
-        player2Hand: player2Hand,
+        players: [{hand: player1Hand, expeditions: player1Expeditions}, {hand: player2Hand, expeditions: player2Expeditions}],
         discardPiles: discardPiles,
-        player1Expeditions: player1Expeditions,
-        player2Expeditions: player2Expeditions
     };
+
+    console.log(state)
 
     return state;
 }

@@ -8,8 +8,8 @@ const HandDisplay: React.FC = () => {
     return (
         <div className='hand'>
             {
-                gameState?.player1Hand.map((card) => (
-                    <CardVisual color={card.color} value={card.value} handIndex={gameState.player1Hand.indexOf(card)}/>
+                gameState?.players[0].hand.map((card) => (
+                    <CardVisual key={gameState.players[0].hand.indexOf(card)} color={card.color} value={card.value} handIndex={gameState.players[0].hand.indexOf(card)}/>
                 ))
             }
         </div>

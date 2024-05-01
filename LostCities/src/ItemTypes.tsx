@@ -18,12 +18,14 @@ export enum TurnStage {
     OPPONENT
 }
 
+export type Player = {
+    hand: Card[];
+    expeditions: Card[][];
+};
+
 export type GameState = {
     deck: Card[];
     turnStage: TurnStage;
-    player1Hand: Card[];
-    player2Hand: Card[];
+    players: Player[];
     discardPiles: Card[][];
-    player1Expeditions: Card[][];
-    player2Expeditions: Card[][];
 };

@@ -9,8 +9,8 @@ const Game = () => {
         <>
             <DrawPile />
             <div className="expedition-table">
-                <ExpeditionPiles player={false} />
-                <ExpeditionPiles player={true} />
+                <ExpeditionPiles player={1} />
+                <ExpeditionPiles player={0} />
             </div>
             <DiscardPiles />
             <HandDisplay />

@@ -5,10 +5,10 @@ import { StartGame } from './gameLogic/DeckManager';
 
 
 export type ReducerAction = 
-    { type: "BASIC_DRAW" } |
-    { type: "DISCARD_PILE_DRAW", pileIndex: number } |
-    { type: "PLAY", cardIndex: number, playSpace: any } |
-    { type: "DISCARD", cardIndex: number }
+    { type: "BASIC_DRAW", player: number } |
+    { type: "DISCARD_PILE_DRAW", pileIndex: number, player: number } |
+    { type: "PLAY", cardIndex: number, player: number, expedition: number } |
+    { type: "DISCARD", cardIndex: number, player: number }
 
 function ActionReducer(state: GameState, action: ReducerAction) {
     switch (state.turnStage) {
@@ -21,19 +21,25 @@ function ActionReducer(state: GameState, action: ReducerAction) {
                         return state;
                     }
                     let newDeck = state.deck;
-                    let newHand = state.player1Hand;
+                    let newHand = state.players[action.player].hand;
                     newHand.push(newDeck.pop()!);
+
+                    let newPlayers = state.players;
+                    newPlayers[action.player].hand = newHand;
                     return {
                         ...state,
                         deck: newDeck,
-                        player1Hand: newHand,
+                        players: newPlayers,
                         turnStage: TurnStage.OPPONENT
                     }
+                case "DISCARD_PILE_DRAW":
+                    return state;
+                case "PLAY":
+                    return state;
+                case "DISCARD":
+                    return state;    
                 default:
                     return state;
-
-
-
             }
                 
 

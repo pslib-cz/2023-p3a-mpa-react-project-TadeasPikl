@@ -7,22 +7,20 @@ import { COLOR_NUMS, CardDnDFromHand } from '../Consts';
 
 export interface ExpeditionPileProps {
     color: Color;
+    player: number;
 }
 
 
-const ExpeditionPile: React.FC<ExpeditionPileProps> = ({color}) => {
+const ExpeditionPile: React.FC<ExpeditionPileProps> = ({color, player}) => {
     const gameState = useContext(GameStateContext);
 
     const GetTopCard = () => {
-        return gameState?.player1Expeditions[COLOR_NUMS[color]].slice(-1)[0]
+        return gameState?.players[player].expeditions[COLOR_NUMS[color]].slice(-1)[0]
     }
 
     const [, drop] = useDrop(() => ({
-        accept: CardDnDFromHand + color,
-        
+        accept: CardDnDFromHand + color + player,
     }))
-
-
 
 
     return (

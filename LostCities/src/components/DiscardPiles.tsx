@@ -6,7 +6,7 @@ const DiscardPiles = () => {
         <div className='card-piles card-piles--discards'>
 
             {ALL_COLORS.map((color) => (
-                <DiscardPile color={color} />
+                <DiscardPile key={color} color={color} />
             ))}
         </div>
     );
