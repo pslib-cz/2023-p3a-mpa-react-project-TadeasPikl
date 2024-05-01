@@ -13,11 +13,11 @@
 
 @font-face {
   font-family: "Rammetto One";
-  src: url("./fonts/Rammetto_One/RammettoOne-Regular.ttf");
+  src: url("/fonts/Rammetto_One/RammettoOne-Regular.ttf");
 }
 
 body {
-  background-image: url("./images/table.jpg");
+  background-image: url("/images/table.jpg");
   background-size: cover;
   height: 100vh;
   width: 100vw;
