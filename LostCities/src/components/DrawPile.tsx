@@ -6,7 +6,7 @@ const DrawPile = () => {
 
 
     function drawCard() {
-        dispatch!({ type: "BASIC_DRAW"});
+        dispatch!({ type: "BASIC_DRAW", player: 0});
     }
 
     

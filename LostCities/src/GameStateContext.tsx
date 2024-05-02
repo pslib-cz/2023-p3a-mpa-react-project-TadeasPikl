@@ -13,7 +13,30 @@ export type ReducerAction =
 function ActionReducer(state: GameState, action: ReducerAction) {
     switch (state.turnStage) {
         case TurnStage.PLAY:
-            return state;
+            switch (action.type) {
+                case "PLAY":
+                    if (state.players[action.player].expeditions[action.expedition].length > 0
+                        &&
+                        state.players[action.player].hand[action.cardIndex].value != 0
+                        &&
+                        state.players[action.player].hand[action.cardIndex].value <= state.players[action.player].expeditions[action.expedition][state.players[action.player].expeditions[action.expedition].length-1].value) {
+                            return state;
+                    }
+                    let newPlayers = state.players;
+                    newPlayers[action.player].expeditions[action.expedition].push(newPlayers[action.player].hand.splice(action.cardIndex, 1)[0]);
+                    let newState = {
+                        ...state,
+                        players: newPlayers,
+                        turnStage: TurnStage.DRAW
+                    }
+                    //console.log(newState)
+                    return newState;
+
+                case "DISCARD":
+                    return state;
+                default:
+                    return state;
+            }
         case TurnStage.DRAW:
             switch (action.type) {
                 case "BASIC_DRAW":
@@ -30,19 +53,14 @@ function ActionReducer(state: GameState, action: ReducerAction) {
                         ...state,
                         deck: newDeck,
                         players: newPlayers,
-                        turnStage: TurnStage.OPPONENT
+                        turnStage: TurnStage.PLAY
                     }
+
                 case "DISCARD_PILE_DRAW":
-                    return state;
-                case "PLAY":
-                    return state;
-                case "DISCARD":
-                    return state;    
+                    return state; 
                 default:
                     return state;
             }
-                
-
         default:
             return state;
     }
@@ -51,7 +69,7 @@ function ActionReducer(state: GameState, action: ReducerAction) {
 
 
 const GameStateContext = createContext<GameState | undefined>(undefined);
-const DispatchContext = createContext<React.Dispatch<any> | undefined>(undefined);
+const DispatchContext = createContext<React.Dispatch<ReducerAction> | undefined>(undefined);
 
 const GameStateProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
 

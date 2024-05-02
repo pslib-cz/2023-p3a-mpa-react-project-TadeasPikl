@@ -80,7 +80,7 @@ body > div {
 .card--image {
   border: var(--basic-white) 1px solid;
   border-radius: 10px;
-  height: calc(240px * var(--card-scale));
+  height: 80%;
   flex-grow: 1;
   flex-shrink: 0;
 }
@@ -120,10 +120,11 @@ body > div {
 }
 .hand > .card {
   margin: 0px -50px;
+  transform: scale(1);
 }
 .hand > .card:hover {
-  z-index: 1;
-  transform: scale(1.1) translateY(-10px);
+  /* z-index: 1; */
+  transform: scale(1.1) translateY(-1.5em);
 }
 
 .card-piles {
@@ -132,6 +133,18 @@ body > div {
   gap: 0.75em;
   background-color: var(--menu-bg);
   padding: 1em 1.5em;
+}
+
+.card-piles > div > .card {
+  height: 100%;
+  width: auto;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.card-piles > div > .card > .card--image {
+  flex-shrink: 1;
+  margin-bottom: 15px;
 }
 
 .card-piles--discards {
