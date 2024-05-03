@@ -6,7 +6,6 @@ import { GameStateProvider } from './GameStateContext.tsx';
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import { DndProvider } from 'react-dnd'
 
-
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <GameStateProvider>
     <DndProvider backend={HTML5Backend}>

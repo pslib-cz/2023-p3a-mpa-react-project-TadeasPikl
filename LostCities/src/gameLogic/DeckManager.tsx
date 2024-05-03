@@ -50,14 +50,31 @@ export function StartGame() {
 
 
 
-export function AddToExpedition(state: GameState/*, handIndex: number, expeditionIndex: number*/) {
+
+
+
+export function AddToExpedition(state: GameState, handIndex: number, expeditionIndex: number, player: number): GameState {
     if (state.turnStage != TurnStage.PLAY) {
         return state;
     }
-    /*
-    var newState = state;
-    var expedition = state.player1Expeditions[expeditionIndex];
-    var card = state.player1Hand[handIndex];
-*/
 
+    // check if the card can be played
+    let cardValue = state.players[player].hand[handIndex].value;
+    let topCard = state.players[player].expeditions[expeditionIndex][state.players[player].expeditions[expeditionIndex].length - 1];
+    if (topCard != undefined && cardValue < topCard.value) {
+        return state;
+    }
+
+    let newPlayers = state.players;
+    newPlayers[player].expeditions[expeditionIndex].push(newPlayers[player].hand.slice(handIndex, 1)[0]);
+    newPlayers[player].hand.splice(handIndex, 1);
+    let newState = {
+        ...state,
+        players: newPlayers,
+        turnStage: TurnStage.DRAW
+    }
+
+    console.log(newState)
+
+    return newState;
 }

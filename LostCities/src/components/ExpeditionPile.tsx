@@ -20,7 +20,7 @@ const ExpeditionPile: React.FC<ExpeditionPileProps> = ({color, player}) => {
     }
 
     const [, drop] = useDrop(() => ({
-        accept: CardDnDFromHand + color + player,
+        accept: CardDnDFromHand + player,
         drop: (item: Card) => dispatch!({type: "PLAY", cardIndex: item.handIndex!, player: 0, expedition: COLOR_NUMS[color]}),
     }))
 

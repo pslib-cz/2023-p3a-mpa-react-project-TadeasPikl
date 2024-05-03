@@ -1,6 +1,6 @@
 import React, { createContext, useReducer } from 'react';
 import { GameState, TurnStage } from './ItemTypes';
-import { StartGame } from './gameLogic/DeckManager';
+import { AddToExpedition, StartGame } from './gameLogic/DeckManager';
 
 
 
@@ -15,23 +15,7 @@ function ActionReducer(state: GameState, action: ReducerAction) {
         case TurnStage.PLAY:
             switch (action.type) {
                 case "PLAY":
-                    if (state.players[action.player].expeditions[action.expedition].length > 0
-                        &&
-                        state.players[action.player].hand[action.cardIndex].value != 0
-                        &&
-                        state.players[action.player].hand[action.cardIndex].value <= state.players[action.player].expeditions[action.expedition][state.players[action.player].expeditions[action.expedition].length-1].value) {
-                            return state;
-                    }
-                    let newPlayers = state.players;
-                    newPlayers[action.player].expeditions[action.expedition].push(newPlayers[action.player].hand.splice(action.cardIndex, 1)[0]);
-                    let newState = {
-                        ...state,
-                        players: newPlayers,
-                        turnStage: TurnStage.DRAW
-                    }
-                    //console.log(newState)
-                    return newState;
-
+                    return AddToExpedition(state, action.cardIndex, action.expedition, action.player);
                 case "DISCARD":
                     return state;
                 default:
@@ -73,7 +57,7 @@ const DispatchContext = createContext<React.Dispatch<ReducerAction> | undefined>
 
 const GameStateProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
 
-    const [gameState, dispatch] = useReducer(ActionReducer, StartGame());
+    const [gameState, dispatch] = useReducer(ActionReducer, null, StartGame);
 
     return (
         <GameStateContext.Provider value={gameState}>
