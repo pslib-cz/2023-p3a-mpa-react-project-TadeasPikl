@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { useDrop } from 'react-dnd';
 import CardVisual from "./Card";
 import { DispatchContext, GameStateContext } from '../GameStateContext';

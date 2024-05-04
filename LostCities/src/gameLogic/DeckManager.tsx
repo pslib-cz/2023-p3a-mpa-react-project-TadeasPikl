@@ -1,5 +1,5 @@
 import { Card, GameState, TurnStage } from "../ItemTypes";
-import { ALL_COLORS } from "../Consts";
+import { ALL_COLORS, COLOR_NUMS } from "../Consts";
 
 export function GenerateDeck() {
     let deck: Card[] = [];
@@ -49,25 +49,24 @@ export function StartGame() {
 }
 
 
-
-
-
-
 export function AddToExpedition(state: GameState, handIndex: number, expeditionIndex: number, player: number): GameState {
     if (state.turnStage != TurnStage.PLAY) {
         return state;
     }
 
     // check if the card can be played
-    let cardValue = state.players[player].hand[handIndex].value;
+    let card = state.players[player].hand[handIndex];
+    if (COLOR_NUMS[card.color] != expeditionIndex) {
+        return state;
+    }
+    debugger;
     let topCard = state.players[player].expeditions[expeditionIndex][state.players[player].expeditions[expeditionIndex].length - 1];
-    if (topCard != undefined && cardValue < topCard.value) {
+    if (topCard != undefined && card.value < topCard.value) {
         return state;
     }
 
     let newPlayers = state.players;
-    newPlayers[player].expeditions[expeditionIndex].push(newPlayers[player].hand.slice(handIndex, 1)[0]);
-    newPlayers[player].hand.splice(handIndex, 1);
+    newPlayers[player].expeditions[expeditionIndex].push(newPlayers[player].hand.splice(handIndex, 1)[0]);
     let newState = {
         ...state,
         players: newPlayers,
