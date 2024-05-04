@@ -39,7 +39,7 @@ export function StartGame(): GameState {
     let state: GameState = {
         deck: deck,
         turnStage: TurnStage.PLAY,
-        players: [{hand: player1Hand, expeditions: player1Expeditions}, {hand: player2Hand, expeditions: player2Expeditions}],
+        players: [{hand: player1Hand, expeditions: player1Expeditions, lastDiscardIndex: null}, {hand: player2Hand, expeditions: player2Expeditions, lastDiscardIndex: null}],
         discardPiles: discardPiles,
     };
 
@@ -50,9 +50,9 @@ export function StartGame(): GameState {
 
 
 export function AddToExpedition(state: GameState, handIndex: number, expeditionIndex: number, player: number): GameState {
-    if (state.turnStage != TurnStage.PLAY) {
+    /*if (state.turnStage != TurnStage.PLAY) {
         return state;
-    }
+    }*/
 
     // check if the card can be played
     let card = state.players[player].hand[handIndex];
@@ -111,12 +111,13 @@ export function GetTotalScore(expeditions: Card[][]): number {
 }
 
 export function DiscardCard(state: GameState, handIndex: number, player: number): GameState {
-    if (state.turnStage != TurnStage.PLAY) {
+    /*if (state.turnStage != TurnStage.PLAY) {
         return state;
-    }
+    }*/
 
     let newPlayers = state.players;
     let newDiscardPiles = state.discardPiles;
+    newPlayers[player].lastDiscardIndex = COLOR_NUMS[state.players[player].hand[handIndex].color];
     newDiscardPiles[COLOR_NUMS[state.players[player].hand[handIndex].color]].push(state.players[player].hand.splice(handIndex, 1)[0]);
 
     let newState = {
@@ -127,4 +128,42 @@ export function DiscardCard(state: GameState, handIndex: number, player: number)
     }
 
     return newState;
+}
+
+export function DrawFromDeck(state: GameState, player: number): GameState {
+    if (state.deck.length === 0) {
+        return state;
+    }
+    let newDeck = state.deck;
+    let newHand = state.players[player].hand;
+    newHand.push(newDeck.pop()!);
+
+    let newPlayers = state.players;
+    newPlayers[player].hand = newHand;
+    newPlayers[player].lastDiscardIndex = null;
+    return {
+        ...state,
+        deck: newDeck,
+        players: newPlayers,
+        turnStage: TurnStage.PLAY
+    }
+}
+
+export function DrawFromDiscardPile(state: GameState, pileIndex: number, player: number): GameState {
+    if (state.discardPiles[pileIndex].length === 0 || state.players[player].lastDiscardIndex === pileIndex) {
+        return state;
+    }
+    let newDiscardPiles = state.discardPiles;
+    let newHand = state.players[player].hand;
+    newHand.push(newDiscardPiles[pileIndex].pop()!);
+
+    let newPlayers = state.players;
+    newPlayers[player].hand = newHand;
+    newPlayers[player].lastDiscardIndex = null;
+    return {
+        ...state,
+        discardPiles: newDiscardPiles,
+        players: newPlayers,
+        turnStage: TurnStage.PLAY
+    }
 }

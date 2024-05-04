@@ -21,6 +21,7 @@ export enum TurnStage {
 export type Player = {
     hand: Card[];
     expeditions: Card[][];
+    lastDiscardIndex: number | null;
 };
 
 export type GameState = {

@@ -1,6 +1,6 @@
 import React, { createContext, useReducer } from 'react';
 import { GameState, TurnStage } from './ItemTypes';
-import { AddToExpedition, DiscardCard, StartGame } from './gameLogic/DeckManager';
+import { AddToExpedition, DiscardCard, DrawFromDeck, DrawFromDiscardPile, StartGame } from './gameLogic/DeckManager';
 
 
 
@@ -24,24 +24,9 @@ function ActionReducer(state: GameState, action: ReducerAction) {
         case TurnStage.DRAW:
             switch (action.type) {
                 case "BASIC_DRAW":
-                    if (state.deck.length === 0) {
-                        return state;
-                    }
-                    let newDeck = state.deck;
-                    let newHand = state.players[action.player].hand;
-                    newHand.push(newDeck.pop()!);
-
-                    let newPlayers = state.players;
-                    newPlayers[action.player].hand = newHand;
-                    return {
-                        ...state,
-                        deck: newDeck,
-                        players: newPlayers,
-                        turnStage: TurnStage.PLAY
-                    }
-
+                    return DrawFromDeck(state, action.player);
                 case "DISCARD_PILE_DRAW":
-                    return state; 
+                    return DrawFromDiscardPile(state, action.pileIndex, action.player);
                 default:
                     return state;
             }

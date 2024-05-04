@@ -11,12 +11,18 @@ interface DiscardPileProps {
 const DiscardPile: React.FC<DiscardPileProps> = ({color}) => {
     const gameState = useContext(GameStateContext);
 
+    const GetTopCard = () => {
+        return gameState?.discardPiles[COLOR_NUMS[color]][gameState?.discardPiles[COLOR_NUMS[color]].length - 1]
+    }
+
     return (
         <div className={"pile__" + color}>
             {
-                gameState?.discardPiles[COLOR_NUMS[color]].map((card) => (
-                    <CardVisual color={card.color} value={card.value} />
-                ))
+                GetTopCard() != undefined
+                ?
+                <CardVisual color={color} value={GetTopCard()!.value} canBeDrawn={true} />
+                :
+                null
             }
         </div>
     );
