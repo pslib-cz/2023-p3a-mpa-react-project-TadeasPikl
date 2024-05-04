@@ -6,7 +6,7 @@
   --card-red: #7B0000;
 
   --basic-white: white;
-  --menu-bg: gray;
+  --menu-bg: #43201b;
 
   --card-scale: 0.6;
 }
@@ -51,8 +51,11 @@ body > div {
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-
   user-select: none;
+}
+
+.card__draggable {
+  cursor: grab;
 }
 
 .card__yellow {
@@ -104,6 +107,7 @@ body > div {
 
 .card__dragging {
   opacity: 0;
+  cursor: grabbing;
   /* display: none; */
 }
 
@@ -136,6 +140,7 @@ body > div {
 }
 
 .card-piles > div > .card {
+  cursor: default;
   height: 100%;
   width: auto;
   padding-top: 0;
@@ -155,9 +160,37 @@ body > div {
   transform: translateY(-50%);
 }
 
-.card-piles--expedtions {
-  flex-direction: row;
+.card-piles--expeditions {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.25rem;
+  display: grid;
+  grid-template-rows: 1fr 1em;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-auto-flow: row;
+  vertical-align: middle;
+  line-height: 1em;
 }
+
+.card-piles--expeditions > .card-piles--pile {
+  width: calc(200px  * var(--card-scale) + 2px);
+  height: calc(300px * var(--card-scale) + 2px);
+  border: 1px solid var(--basic-white);
+  border-radius: 3px;
+
+  order: -1;
+  /*filter: brightness(0.9);*/
+}
+
+.card-piles--expeditions__enemy {
+  grid-template-rows: 1rem 1fr;
+}
+
+.card-piles--expeditions__enemy > .card-piles--pile {
+  order: 1;
+}
+
+
 
 .card-piles--discards > div {
   width: calc(300px  * var(--card-scale) + 2px);
@@ -167,17 +200,12 @@ body > div {
   /*filter: brightness(0.9);*/
 }
 
-.card-piles--expeditions > div {
-  width: calc(200px  * var(--card-scale) + 2px);
-  height: calc(300px * var(--card-scale) + 2px);
-  border: 1px solid var(--basic-white);
-  border-radius: 3px;
-  /*filter: brightness(0.9);*/
+@media screen and (min-height: 1035px){
+  .card-piles--discards > div {
+    width: calc(200px  * var(--card-scale) + 2px);
+    height: calc(300px * var(--card-scale) + 2px);
+  }
 }
-
-/*.discards > div > .card {
-  transform: rotate(90deg);
-}*/
 
 .expedition-table {
   position: absolute;

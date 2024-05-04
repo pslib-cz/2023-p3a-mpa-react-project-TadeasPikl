@@ -1,6 +1,6 @@
 import React, { createContext, useReducer } from 'react';
 import { GameState, TurnStage } from './ItemTypes';
-import { AddToExpedition, StartGame } from './gameLogic/DeckManager';
+import { AddToExpedition, DiscardCard, StartGame } from './gameLogic/DeckManager';
 
 
 
@@ -17,7 +17,7 @@ function ActionReducer(state: GameState, action: ReducerAction) {
                 case "PLAY":
                     return AddToExpedition(state, action.cardIndex, action.expedition, action.player);
                 case "DISCARD":
-                    return state;
+                    return DiscardCard(state, action.cardIndex, action.player);
                 default:
                     return state;
             }

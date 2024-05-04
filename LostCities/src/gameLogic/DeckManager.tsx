@@ -1,7 +1,7 @@
 import { Card, GameState, TurnStage } from "../ItemTypes";
 import { ALL_COLORS, COLOR_NUMS } from "../Consts";
 
-export function GenerateDeck() {
+export function GenerateDeck(): Card[] {
     let deck: Card[] = [];
     
     // expedition cards
@@ -23,7 +23,7 @@ export function GenerateDeck() {
     return deck;
 }
 
-export function StartGame() {
+export function StartGame(): GameState {
     let deck = GenerateDeck();
     let player1Hand: Card[] = [];
     let player2Hand: Card[] = [];
@@ -43,7 +43,7 @@ export function StartGame() {
         discardPiles: discardPiles,
     };
 
-    console.log(state)
+    //console.log(state)
 
     return state;
 }
@@ -59,7 +59,7 @@ export function AddToExpedition(state: GameState, handIndex: number, expeditionI
     if (COLOR_NUMS[card.color] != expeditionIndex) {
         return state;
     }
-    debugger;
+
     let topCard = state.players[player].expeditions[expeditionIndex][state.players[player].expeditions[expeditionIndex].length - 1];
     if (topCard != undefined && card.value < topCard.value) {
         return state;
@@ -73,7 +73,58 @@ export function AddToExpedition(state: GameState, handIndex: number, expeditionI
         turnStage: TurnStage.DRAW
     }
 
-    console.log(newState)
+    //console.log(newState)
+
+    return newState;
+}
+
+export function GetExpeditionScore(expedition: Card[]): number {
+    if (expedition.length == 0) {
+        return 0;
+    }
+
+    let score = -20;
+    let multiplier = 1;
+
+    for (let card of expedition) {
+        score += card.value;
+    }
+    if (expedition.length >= 8) {
+        score += 20;
+    }
+
+    for (const wager of expedition) {
+        if (wager.value == 0) {
+            multiplier++;
+        }
+    }
+
+    return score * multiplier;
+}
+
+export function GetTotalScore(expeditions: Card[][]): number {
+    let total = 0;
+    for (const expedition of expeditions) {
+        total += GetExpeditionScore(expedition);
+    }
+    return total;
+}
+
+export function DiscardCard(state: GameState, handIndex: number, player: number): GameState {
+    if (state.turnStage != TurnStage.PLAY) {
+        return state;
+    }
+
+    let newPlayers = state.players;
+    let newDiscardPiles = state.discardPiles;
+    newDiscardPiles[COLOR_NUMS[state.players[player].hand[handIndex].color]].push(state.players[player].hand.splice(handIndex, 1)[0]);
+
+    let newState = {
+        ...state,
+        players: newPlayers,
+        discardPiles: newDiscardPiles,
+        turnStage: TurnStage.DRAW
+    }
 
     return newState;
 }

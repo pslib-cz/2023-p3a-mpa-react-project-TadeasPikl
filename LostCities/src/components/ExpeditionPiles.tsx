@@ -8,8 +8,7 @@ interface ExpeditionPilesProps {
 
 const ExpeditionPiles: React.FC<ExpeditionPilesProps> = ({player}) => {
     return (
-        <div className='card-piles card-piles--expeditions'>
-
+        <div className={"card-piles card-piles--expeditions" + (player != 0 ? " card-piles--expeditions__enemy" : "")}>
             {ALL_COLORS.map((color) => (
                 <ExpeditionPile key={color} color={color} player={player} />
             ))}

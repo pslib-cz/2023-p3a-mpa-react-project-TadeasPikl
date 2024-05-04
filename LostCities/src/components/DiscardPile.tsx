@@ -9,8 +9,6 @@ interface DiscardPileProps {
 }
 
 const DiscardPile: React.FC<DiscardPileProps> = ({color}) => {
-    //const [cards, setCards] = useState<Card[]>([]);
-    
     const gameState = useContext(GameStateContext);
 
     return (

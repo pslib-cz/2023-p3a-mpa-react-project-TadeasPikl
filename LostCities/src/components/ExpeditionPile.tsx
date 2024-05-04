@@ -4,6 +4,7 @@ import CardVisual from "./Card";
 import { DispatchContext, GameStateContext } from '../GameStateContext';
 import { Card, Color } from '../ItemTypes';
 import { COLOR_NUMS, CardDnDFromHand } from '../Consts';
+import { GetExpeditionScore } from '../gameLogic/DeckManager';
 
 export interface ExpeditionPileProps {
     color: Color;
@@ -25,11 +26,18 @@ const ExpeditionPile: React.FC<ExpeditionPileProps> = ({color, player}) => {
     }))
 
     return (
-        <div ref={drop} className={"pile__" + color}>
-            {
-                GetTopCard() != undefined ? <CardVisual color={color} value={GetTopCard()!.value} /> : null
-            }
-        </div>
+        <>
+            <div ref={drop} className={"card-piles--pile pile__" + color}>
+                {
+                    GetTopCard() != undefined ? <CardVisual color={color} value={GetTopCard()!.value} /> : null
+                }
+            </div>
+            <div className="card-piles--score">
+                {
+                    GetExpeditionScore(gameState?.players[player].expeditions[COLOR_NUMS[color]]!)
+                }
+            </div>
+        </>
     );
 };
 
