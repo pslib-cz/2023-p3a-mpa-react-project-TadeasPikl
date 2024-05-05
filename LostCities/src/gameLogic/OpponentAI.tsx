@@ -1,7 +1,7 @@
-import { COLOR_NUMS, NUMBER_OF_RANDOM_ACTIONS_SIMULATED } from "../Consts";
+import { COLOR_NUMS } from "../Consts";
 import { ReducerAction } from "../GameStateContext";
 import { GameState, TurnStage } from "../ItemTypes";
-import { AddToExpedition, DiscardCard, DrawFromDiscardPile, ExecuteAction, GetExpeditionScore } from "./DeckManager";
+import { ExecuteAction } from "./DeckManager";
 
 
 // SINGLE TURN MINIMAX
@@ -36,7 +36,7 @@ export function PerformAITurn(state: GameState): GameState {
 }
 
 
-
+/*
 function ChooseAction(state: GameState, actions: ReducerAction[]): ReducerAction {
     let bestActions: ReducerAction[] = [];
     // debugger;
@@ -152,7 +152,7 @@ function EvaluateActionResult(state: GameState, action: ReducerAction): number {
     return score;
 }
 
-
+*/
 function GetAllPlayActions(state: GameState, playerNum: number): ReducerAction[] {
     let actions: ReducerAction[] = [];
     let player = state.players[playerNum];
@@ -187,7 +187,7 @@ function GetAllDrawActions(state: GameState, playerNum: number): ReducerAction[]
 
     return actions;
 }
-
+/*
 
 function SimulateDraw(state: GameState, playerNum: number): GameState {
     let knownDeck = state.deck.concat(state.players[playerNum == 1 ? 0 : 1].hand);
@@ -217,3 +217,4 @@ function SimulateAction(state: GameState, action: ReducerAction): GameState {
             return newState;
     }
 }
+*/
