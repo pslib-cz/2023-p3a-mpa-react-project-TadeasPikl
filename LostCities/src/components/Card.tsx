@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Fish, Handshake, Pyramids, Snow, Tree, Volcano } from '../assets/Icons';
-import { Card, Color, TurnStage } from '../ItemTypes';
+import { Color, TurnStage } from '../ItemTypes';
 import { useDrag } from 'react-dnd'
 import { COLOR_NUMS, CardDnDFromHand } from '../Consts';
 import { DispatchContext, GameStateContext } from '../GameStateContext';

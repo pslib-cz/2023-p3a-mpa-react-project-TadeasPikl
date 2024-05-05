@@ -15,7 +15,8 @@ export type Card = {
 export enum TurnStage {
     PLAY,
     DRAW,
-    OPPONENT
+    OPPONENT,
+    GAME_OVER
 }
 
 export type Player = {

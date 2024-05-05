@@ -1,6 +1,7 @@
 import React, { createContext, useReducer } from 'react';
 import { GameState, TurnStage } from './ItemTypes';
-import { AddToExpedition, DiscardCard, DrawFromDeck, DrawFromDiscardPile, StartGame } from './gameLogic/DeckManager';
+import { ExecuteAction, GetTotalScore, StartGame } from './gameLogic/DeckManager';
+import { PerformAITurn } from './gameLogic/OpponentAI';
 
 
 
@@ -10,31 +11,26 @@ export type ReducerAction =
     { type: "PLAY", cardIndex: number, player: number, expedition: number } |
     { type: "DISCARD", cardIndex: number, player: number }
 
-function ActionReducer(state: GameState, action: ReducerAction) {
-    switch (state.turnStage) {
-        case TurnStage.PLAY:
-            switch (action.type) {
-                case "PLAY":
-                    return AddToExpedition(state, action.cardIndex, action.expedition, action.player);
-                case "DISCARD":
-                    return DiscardCard(state, action.cardIndex, action.player);
-                default:
-                    return state;
-            }
-        case TurnStage.DRAW:
-            switch (action.type) {
-                case "BASIC_DRAW":
-                    return DrawFromDeck(state, action.player);
-                case "DISCARD_PILE_DRAW":
-                    return DrawFromDiscardPile(state, action.pileIndex, action.player);
-                default:
-                    return state;
-            }
-        default:
-            return state;
-    }
-}
 
+function ActionReducer(state: GameState, action: ReducerAction): GameState {
+    if (state.deck.length === 0 && state.turnStage === TurnStage.DRAW) {
+        alert(
+            "Game Over!" + "\n" +
+            "Player: " + GetTotalScore(state.players[0].expeditions) + "\n" +
+            "\"AI\": " + GetTotalScore(state.players[1].expeditions) + "\n" +
+            (GetTotalScore(state.players[0].expeditions) > GetTotalScore(state.players[1].expeditions) ? "Player" : "AI") + " Has Won!"
+        );
+        return {
+            ...state,
+            turnStage: TurnStage.GAME_OVER
+        }
+    }
+    let newState = ExecuteAction(state, action);
+    if (newState.turnStage === TurnStage.OPPONENT) {
+        newState = PerformAITurn(newState);
+    }
+    return newState;
+}
 
 
 const GameStateContext = createContext<GameState | undefined>(undefined);

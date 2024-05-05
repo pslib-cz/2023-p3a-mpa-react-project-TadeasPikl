@@ -163,6 +163,8 @@ body > div {
   left: 0;
   top: 50%;
   transform: translateY(-50%);
+
+  box-shadow: 0px 0px 50px 15px rgba(0,0,0,0.75);
 }
 
 .card-piles--expeditions {
@@ -217,6 +219,8 @@ body > div {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+
+  box-shadow: 0px 0px 50px 15px rgba(0,0,0,0.75);
 }
 
 
@@ -241,6 +245,19 @@ body > div {
 
 .draw-pile {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 1em;
+  right: 1em;
+  width: calc(200px  * var(--card-scale));
+  height: calc(300px * var(--card-scale));
+
+  background-image: url("/images/card_back.png");
+  background-position: center;
+  background-size: cover;
+
+  border: black 5px solid;
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.75);
 }

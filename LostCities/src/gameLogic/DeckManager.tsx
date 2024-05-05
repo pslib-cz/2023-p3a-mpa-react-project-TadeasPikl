@@ -1,5 +1,6 @@
 import { Card, GameState, TurnStage } from "../ItemTypes";
 import { ALL_COLORS, COLOR_NUMS } from "../Consts";
+import { ReducerAction } from "../GameStateContext";
 
 export function GenerateDeck(): Card[] {
     let deck: Card[] = [];
@@ -117,6 +118,7 @@ export function DiscardCard(state: GameState, handIndex: number, player: number)
 
     let newPlayers = state.players;
     let newDiscardPiles = state.discardPiles;
+    debugger;
     newPlayers[player].lastDiscardIndex = COLOR_NUMS[state.players[player].hand[handIndex].color];
     newDiscardPiles[COLOR_NUMS[state.players[player].hand[handIndex].color]].push(state.players[player].hand.splice(handIndex, 1)[0]);
 
@@ -134,7 +136,7 @@ export function DrawFromDeck(state: GameState, player: number): GameState {
     if (state.deck.length === 0) {
         return state;
     }
-    let newDeck = state.deck;
+    let newDeck = state.deck
     let newHand = state.players[player].hand;
     newHand.push(newDeck.pop()!);
 
@@ -145,7 +147,7 @@ export function DrawFromDeck(state: GameState, player: number): GameState {
         ...state,
         deck: newDeck,
         players: newPlayers,
-        turnStage: TurnStage.PLAY
+        turnStage: TurnStage.OPPONENT
     }
 }
 
@@ -164,6 +166,45 @@ export function DrawFromDiscardPile(state: GameState, pileIndex: number, player:
         ...state,
         discardPiles: newDiscardPiles,
         players: newPlayers,
-        turnStage: TurnStage.PLAY
+        turnStage: TurnStage.OPPONENT
+    }
+}
+
+export function ExecuteAction(state: GameState, action: ReducerAction): GameState {
+    if (action.player === 1) {
+        switch (action.type) {
+            case "PLAY":
+                return AddToExpedition(state, action.cardIndex, action.expedition, action.player);
+            case "DISCARD":
+                return DiscardCard(state, action.cardIndex, action.player);
+            case "BASIC_DRAW":
+                return DrawFromDeck(state, action.player);
+            case "DISCARD_PILE_DRAW":
+                return DrawFromDiscardPile(state, action.pileIndex, action.player);
+            default:
+                throw new Error("Invalid AI action");
+        }
+    }
+    switch (state.turnStage) {
+        case TurnStage.PLAY:
+            switch (action.type) {
+                case "PLAY":
+                    return AddToExpedition(state, action.cardIndex, action.expedition, action.player);
+                case "DISCARD":
+                    return DiscardCard(state, action.cardIndex, action.player);
+                default:
+                    return state;
+            }
+        case TurnStage.DRAW:
+            switch (action.type) {
+                case "BASIC_DRAW":
+                    return DrawFromDeck(state, action.player);
+                case "DISCARD_PILE_DRAW":
+                    return DrawFromDiscardPile(state, action.pileIndex, action.player);
+                default:
+                    return state;
+            }
+        default:
+            return state;
     }
 }
