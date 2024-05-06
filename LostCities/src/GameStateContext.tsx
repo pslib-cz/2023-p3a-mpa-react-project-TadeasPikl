@@ -1,6 +1,6 @@
 import React, { createContext, useReducer } from 'react';
 import { GameState, TurnStage } from './ItemTypes';
-import { ExecuteAction, GetTotalScore, StartGame } from './gameLogic/DeckManager';
+import { ExecuteAction, StartGame } from './gameLogic/DeckManager';
 import { PerformAITurn } from './gameLogic/OpponentAI';
 
 
@@ -14,12 +14,12 @@ export type ReducerAction =
 
 function ActionReducer(state: GameState, action: ReducerAction): GameState {
     if (state.deck.length === 0 && state.turnStage === TurnStage.DRAW) {
-        alert(
-            "Game Over!" + "\n" +
-            "Player: " + GetTotalScore(state.players[0].expeditions) + "\n" +
-            "\"AI\": " + GetTotalScore(state.players[1].expeditions) + "\n" +
-            (GetTotalScore(state.players[0].expeditions) > GetTotalScore(state.players[1].expeditions) ? "Player" : "AI") + " Has Won!"
-        );
+        // alert(
+        //     "Game Over!" + "\n" +
+        //     "Player: " + GetTotalScore(state.players[0].expeditions) + "\n" +
+        //     "\"AI\": " + GetTotalScore(state.players[1].expeditions) + "\n" +
+        //     (GetTotalScore(state.players[0].expeditions) > GetTotalScore(state.players[1].expeditions) ? "Player" : "AI") + " Has Won!"
+        // );
         return {
             ...state,
             turnStage: TurnStage.GAME_OVER
