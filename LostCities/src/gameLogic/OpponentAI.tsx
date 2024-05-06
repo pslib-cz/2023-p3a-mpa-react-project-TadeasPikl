@@ -19,9 +19,9 @@ export function PerformAITurn(state: GameState): GameState {
 
     let newState = ExecuteAction(state, playAction);
 
-    // debugger;
-    let drawAction = ChooseAction(newState, GetAllDrawActions(newState, 1));
-    //let drawAction = GetAllDrawActions(newState, 1)[Math.floor(Math.random() * GetAllDrawActions(newState, 1).length)];
+    debugger;
+    // let drawAction = ChooseAction(newState, GetAllDrawActions(newState, 1));
+    let drawAction = GetAllDrawActions(newState, 1)[Math.floor(Math.random() * GetAllDrawActions(newState, 1).length)];
     // debugger;
 
     // console.log("AI DRAW ACTION");
@@ -109,14 +109,14 @@ function EvaluateActionResult(state: GameState, action: ReducerAction): number {
                 return -100;
             }
             if ((expedition[expedition.length - 1] ?? {value: 0}).value - cardValue > 4) {
-                score -= 20;
+                score -= 40;
             }
             break;
         case "DISCARD":
-            score -= 1;
+            score -= 50;
             break;
         case "BASIC_DRAW":
-            score -= 1;
+            score += 1;
             break;
         case "DISCARD_PILE_DRAW":
             score += 1;
@@ -209,7 +209,7 @@ function GetAllDrawActions(state: GameState, playerNum: number): ReducerAction[]
 
     actions.push({type: "BASIC_DRAW", player: 1});
 
-    for (let i = 0; i < state.discardPiles.length; i++) {
+    for (let i = 0; i < state.discardPiles.length-1; i++) {
         if (state.discardPiles[i].length > 0) {
             if (state.players[playerNum].lastDiscardIndex != i) {
                 actions.push({type: "DISCARD_PILE_DRAW", pileIndex: i, player: playerNum});
