@@ -11,10 +11,10 @@ export function PerformAITurn(state: GameState): GameState {
     // let playAction = ChooseAction(state, GetAllPlayActions(state, 1));
     let playAction = GetAllPlayActions(state, 1)[Math.floor(Math.random() * GetAllPlayActions(state, 1).length)];
 
-    console.group("AI TURN");
-    console.log(state.players[1].hand);
-    console.log("AI PLAY ACTION");
-    console.log(playAction);
+    // console.group("AI TURN");
+    // console.log(state.players[1].hand);
+    // console.log("AI PLAY ACTION");
+    // console.log(playAction);
 
     let newState = ExecuteAction(state, playAction);
 
@@ -23,9 +23,9 @@ export function PerformAITurn(state: GameState): GameState {
     let drawAction = GetAllDrawActions(newState, 1)[Math.floor(Math.random() * GetAllDrawActions(newState, 1).length)];
     // debugger;
 
-    console.log("AI DRAW ACTION");
-    console.log(drawAction);
-    console.groupEnd();
+    // console.log("AI DRAW ACTION");
+    // console.log(drawAction);
+    // console.groupEnd();
 
     newState = ExecuteAction(newState, drawAction);
 
