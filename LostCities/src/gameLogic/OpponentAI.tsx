@@ -1,15 +1,16 @@
-import { COLOR_NUMS } from "../Consts";
+import { COLOR_NUMS, NUMBER_OF_RANDOM_ACTIONS_SIMULATED } from "../Consts";
 import { ReducerAction } from "../GameStateContext";
 import { GameState, TurnStage } from "../ItemTypes";
-import { ExecuteAction } from "./DeckManager";
+import { AddToExpedition, DiscardCard,DrawFromDiscardPile, GetExpeditionScore, ExecuteAction } from "./DeckManager";
 
 
 // SINGLE TURN MINIMAX
 
 
 export function PerformAITurn(state: GameState): GameState {
-    // let playAction = ChooseAction(state, GetAllPlayActions(state, 1));
-    let playAction = GetAllPlayActions(state, 1)[Math.floor(Math.random() * GetAllPlayActions(state, 1).length)];
+    // debugger;
+    let playAction = ChooseAction(state, GetAllPlayActions(state, 1));
+    // let playAction = GetAllPlayActions(state, 1)[Math.floor(Math.random() * GetAllPlayActions(state, 1).length)];
 
     // console.group("AI TURN");
     // console.log(state.players[1].hand);
@@ -19,8 +20,8 @@ export function PerformAITurn(state: GameState): GameState {
     let newState = ExecuteAction(state, playAction);
 
     // debugger;
-    // let drawAction = ChooseAction(newState, GetAllDrawActions(newState, 1));
-    let drawAction = GetAllDrawActions(newState, 1)[Math.floor(Math.random() * GetAllDrawActions(newState, 1).length)];
+    let drawAction = ChooseAction(newState, GetAllDrawActions(newState, 1));
+    //let drawAction = GetAllDrawActions(newState, 1)[Math.floor(Math.random() * GetAllDrawActions(newState, 1).length)];
     // debugger;
 
     // console.log("AI DRAW ACTION");
@@ -36,7 +37,7 @@ export function PerformAITurn(state: GameState): GameState {
 }
 
 
-/*
+
 function ChooseAction(state: GameState, actions: ReducerAction[]): ReducerAction {
     let bestActions: ReducerAction[] = [];
     // debugger;
@@ -101,7 +102,7 @@ function EvaluateActionResult(state: GameState, action: ReducerAction): number {
 
     switch (action.type) {
         case "PLAY":
-            debugger;
+            // debugger;
             let cardValue = state.players[1].hand[action.cardIndex].value
             let expedition = state.players[1].expeditions[COLOR_NUMS[state.players[1].hand[action.cardIndex].color]];
             if (cardValue > Math.min(...state.players[1].hand.map(card => card.value))) {
@@ -152,20 +153,51 @@ function EvaluateActionResult(state: GameState, action: ReducerAction): number {
     return score;
 }
 
-*/
+
+function SimulateDraw(state: GameState, playerNum: number): GameState {
+    let knownDeck = state.deck.concat(state.players[playerNum == 1 ? 0 : 1].hand);
+    let newPlayers = state.players;
+
+    newPlayers[playerNum].hand.push(knownDeck[Math.floor(Math.random() * knownDeck.length)]);
+
+    return {
+        ...state,
+        players: newPlayers
+    }
+}
+
+function SimulateAction(state: GameState, action: ReducerAction): GameState {
+    // debugger;
+    let newState = structuredClone(state);
+    switch (action.type) {
+        case "PLAY":
+            return AddToExpedition(newState, action.cardIndex, action.expedition, action.player);
+        case "DISCARD":
+            return DiscardCard(newState, action.cardIndex, action.player);
+        case "BASIC_DRAW":
+            return SimulateDraw(newState, action.player);
+        case "DISCARD_PILE_DRAW":
+            return DrawFromDiscardPile(newState, action.pileIndex, action.player);
+        default:
+            return newState;
+    }
+}
+
+
+
 function GetAllPlayActions(state: GameState, playerNum: number): ReducerAction[] {
     let actions: ReducerAction[] = [];
     let player = state.players[playerNum];
     let hand = player.hand;
 
-    for (let i = 0; i < hand.length; i++) {
+    for (let i = 0; i < hand.length-1; i++) {
         let j = COLOR_NUMS[hand[i].color];
         if (hand[i].value >= (player.expeditions[j][player.expeditions[j].length - 1] ?? {value: 0}).value) {
             actions.push({type: "PLAY", cardIndex: i, player: 1, expedition: j});
         }
     }
 
-    for (let i = 0; i < hand.length; i++) {
+    for (let i = 0; i < hand.length-1; i++) {
         actions.push({type: "DISCARD", cardIndex: i, player: 1});
     }
 
@@ -187,34 +219,3 @@ function GetAllDrawActions(state: GameState, playerNum: number): ReducerAction[]
 
     return actions;
 }
-/*
-
-function SimulateDraw(state: GameState, playerNum: number): GameState {
-    let knownDeck = state.deck.concat(state.players[playerNum == 1 ? 0 : 1].hand);
-    let newPlayers = state.players;
-
-    newPlayers[playerNum].hand.push(knownDeck[Math.floor(Math.random() * knownDeck.length)]);
-
-    return {
-        ...state,
-        players: newPlayers
-    }
-}
-
-function SimulateAction(state: GameState, action: ReducerAction): GameState {
-    // debugger;
-    let newState = {...state};
-    switch (action.type) {
-        case "PLAY":
-            return AddToExpedition(newState, action.cardIndex, action.expedition, action.player);
-        case "DISCARD":
-            return DiscardCard(newState, action.cardIndex, action.player);
-        case "BASIC_DRAW":
-            return SimulateDraw(newState, action.player);
-        case "DISCARD_PILE_DRAW":
-            return DrawFromDiscardPile(newState, action.pileIndex, action.player);
-        default:
-            return newState;
-    }
-}
-*/

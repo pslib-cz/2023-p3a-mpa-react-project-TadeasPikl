@@ -118,7 +118,7 @@ export function DiscardCard(state: GameState, handIndex: number, player: number)
 
     let newPlayers = state.players;
     let newDiscardPiles = state.discardPiles;
-    debugger;
+    // debugger;
     newPlayers[player].lastDiscardIndex = COLOR_NUMS[state.players[player].hand[handIndex].color];
     newDiscardPiles[COLOR_NUMS[state.players[player].hand[handIndex].color]].push(state.players[player].hand.splice(handIndex, 1)[0]);
 
