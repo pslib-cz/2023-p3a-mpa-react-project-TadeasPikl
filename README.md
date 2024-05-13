@@ -1,15 +1,16 @@
-# Název mého projektu, programu, hry...
-
+# Rekreace hry Ztracená města v react-ts
+https://www.zatrolene-hry.cz/spolecenska-hra/ztracena-mesta-512/
 ## Téma
 
-Tady bude krátký a úderný popis o účelu, významu, funkcionalitě...
+Ztracená města je karetní hra pro dva hráče od Reinera Knizii. Hráči se pomocí vykládání karet vydávají na objevitelské cesty do odlehlých a tajemných koutů země.
+
+V každém kole hráč vykládá jednu kartu expedice nebo sázky. Pokud nechce nebo nemůže vyložit kartu, musí jednu kartu odhodit na odkládací plochu, čímž ale může nahrát protivníkovy. Pak si bere kartu buď z lízacího balíčku nebo z hromádek odhozených karet, které tam bud protivník vyhodil nebo si je zde sám odložil. Hra končí ve chvíli, kdy se lízne poslední karta z lízacího balíčku. Pak se spočítají body za vyložené karty expedice. Vyhrává ten, kdo získal po třech hrách nejvíce bodů.
 
 ## Odkazy pro vývoj
 
 Zde budou živé linky na:
-- figma návrh stránek aplikace
-- odkaz na gh-pages projektu
-- odkaz do repozitáře projektu, pokud pracuji v teamu a zde vývoj neprobíhá
+- figma návrh stránek aplikace - [![Figma link](https://img.shields.io/badge/Link-Figma-purple)](https://www.figma.com/file/eWP2Gva3gnbnTXtWtdKm1N/Lost-Cities?type=design&node-id=0%3A1&mode=design&t=4ws58OK3slQo0XpU-1)
+- odkaz na gh-pages projektu - [![Github Pages](https://img.shields.io/badge/Github-Pages-blue)](https://pslib-cz.github.io/2023-p3a-mpa-react-project-TadeasPikl)
 
 ### Z čeho čerpat
 
