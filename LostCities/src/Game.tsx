@@ -23,7 +23,7 @@ const Game = () => {
             </div>
             :
             <>
-                <a href="https://cdn.1j1ju.com/medias/c8/66/47-lost-cities-rulebook.pdf" className="rules" target="_blank">Rules</a>
+                <a href="./lost-cities-rulebook.pdf" className="rules" target="_blank">Rules</a>
                 <DrawPile />
                 <div className="expedition-table">
                     <ExpeditionPiles player={1} />
